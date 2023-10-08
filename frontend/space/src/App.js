@@ -12,6 +12,7 @@ import Earth from './components/Earth';
 import Moon from './components/Moon';
 import Mars from './components/Mars';
 import Asteroids from './components/Asteroids';
+import ImageGallery from './components/gallery/ImageGallery';
 
 const containerStyle = {
   backgroundImage: `url(${background})`,
@@ -89,6 +90,7 @@ function App() {
   <Route path="/moon" element={<Moon />} />
   <Route path="/asteroids" element={<Asteroids />} />
   <Route path="/mars" element={<Mars />} />
+  <Route path="/earth/images" element={<ImageGallery />} />
   {/* ... other routes */}
 </Routes>
 

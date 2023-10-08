@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import myImage from '../Images/earth.png';
 import styled, { keyframes } from 'styled-components';
+import ImageGallery from './gallery/ImageGallery'; // Import the ImageGallery component
 
 const audioFile = '../rsc/cosmos_sound.mp3';
 const rotate = keyframes`
@@ -91,24 +92,35 @@ const AudioPlayer = styled.audio`
 `;
 
 const Earth = () => {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedPlanet, setSelectedPlanet] = useState('earth');
-  
-    const toggleDropdown = () => {
-      setIsDropdownOpen(!isDropdownOpen);
-    };
-  
-    const handleDropdownChange = (event) => {
-      setSelectedPlanet(event.target.value);
-    };
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedPlanet, setSelectedPlanet] = useState('earth');
+  const [isImageGalleryOpen, setIsImageGalleryOpen] = useState(false); // State to control image gallery
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleDropdownChange = (event) => {
+    setSelectedPlanet(event.target.value);
+  };
+
+  const openImageGallery = () => {
+    setIsImageGalleryOpen(true);
+  };
+
+  const closeImageGallery = () => {
+    setIsImageGalleryOpen(false);
+  };
 
   return (
     <EarthPage className="earth-page">
       <ButtonContainer>
-        <Buttons>Image</Buttons>
+        {/* Open the image gallery when the "Image" button is clicked */}
+        <Buttons onClick={openImageGallery}>Image</Buttons>
         <Buttons>Videos</Buttons>
         <Buttons>Temperature</Buttons>
         <Buttons>Humidity</Buttons>
+        <Buttons>Weather</Buttons>
       </ButtonContainer>
       <CenterContainer>
         <EarthImage src={myImage} alt="Earth" />
@@ -126,9 +138,11 @@ const Earth = () => {
           <option value="moon">Moon</option>
           <option value="mars">Mars</option>
           <option value="asteroids">Asteroids</option>
-          {/* Add more options as needed */}
         </Dropdown>
       </DropdownContainer>
+
+      {/* Conditionally render the ImageGallery component */}
+      {isImageGalleryOpen && <ImageGallery onClose={closeImageGallery} />}
     </EarthPage>
   );
 };
